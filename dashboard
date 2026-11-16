@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h2>Workspace Hub</h2>
+    <button class="btn btn-primary" id="openTaskBtn">+ Add Task / Event</button>
+  </header>
+
+  <div class="main-container">
+    
+    <!-- LEFT: Calendar Module Container -->
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 id="calHeading">Calendar</h3>
+            <span id="calSubheading" style="font-size: 11px; color: #64748b;"></span>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <div class="view-toggles">
+              <button class="btn btn-outline active" id="view-month">Month</button>
+              <button class="btn btn-outline" id="view-day">Day</button>
+              <button class="btn btn-outline" id="view-year">Year</button>
+            </div>
+            <div>
+              <button class="btn btn-outline" id="calPrev">&lt;</button>
+              <button class="btn btn-outline" id="calToday">Today</button>
+              <button class="btn btn-outline" id="calNext">&gt;</button>
+            </div>
+          </div>
+        </div>
+        <div id="calendarDisplay"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Events, Todos, and Expenses Containers -->
+    <div>
+      
+      <!-- Module: Events -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Events</h3>
+          <button class="btn btn-outline" id="openAddEventBtn">+ Add</button>
+        </div>
+        <div id="eventsListContainer"></div>
+      </div>
+
+      <!-- Module: To-Do -->
+      <div class="card">
+        <div class="card-header">
+          <h3>To-Do List</h3>
+          <button class="btn btn-outline" id="openAddTodoBtn">+ Add</button>
+        </div>
+        <div id="todoListContainer"></div>
+      </div>
+
+      <!-- Module: Expenses -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Expenses & Income</h3>
+          <button class="btn btn-outline" id="openAddExpenseBtn">+ Add</button>
+        </div>
+        
+        <div class="finance-overview">
+          <div class="finance-box box-inc">
+            <div>INCOME</div>
+            <div id="incTotal" class="finance-amount">$0.00</div>
+          </div>
+          <div class="finance-box box-exp">
+            <div>SPENT</div>
+            <div id="expTotal" class="finance-amount">$0.00</div>
+          </div>
+          <div class="finance-box box-net">
+            <div>NET</div>
+            <div id="netTotal" class="finance-amount">$0.00</div>
+          </div>
+        </div>
+
+        <div id="expenseListContainer"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Task/Event Modal -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal">
+      <h4 id="taskModalTitle" style="margin-bottom: 12px;">Task</h4>
+      <form id="taskForm">
+        <input type="hidden" id="taskId" />
+        <div class="form-group">
+          <label>Type</label>
+          <select id="taskType">
+            <option value="todo">To-Do List Item</option>
+            <option value="event">Scheduled Event</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="taskTitle" required />
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="taskDate" required />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="closeTaskModalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Expense Modal -->
+  <div class="modal-overlay" id="expenseModal">
+    <div class="modal">
+      <h4 id="expenseModalTitle" style="margin-bottom: 12px;">Transaction</h4>
+      <form id="expenseForm">
+        <input type="hidden" id="expenseId" />
+        <div class="form-group">
+          <label>Type</label>
+          <select id="expenseType">
+            <option value="expense">Expense (-)</option>
+            <option value="income">Income (+)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description / Note</label>
+          <input type="text" id="expenseDesc" required />
+        </div>
+        <div class="form-group">
+          <label>Amount ($)</label>
+          <input type="number" step="0.01" id="expenseAmount" required />
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="expenseDate" required />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="closeExpenseModalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Entry Script using standard ES Modules -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
